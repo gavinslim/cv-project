@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Input from './Input';
-// import Job from './Job';
+import Job from './Job';
 import uniqid from 'uniqid';
 import Display from './Display';
 
@@ -11,6 +11,7 @@ class Experience extends Component {
     this.initJobClicked = this.initJobClicked.bind(this);
     this.saveJobClicked = this.saveJobClicked.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.foo = this.foo.bind(this);
 
     this.state = {
       job: {
@@ -24,12 +25,15 @@ class Experience extends Component {
         id: uniqid()
       },
       jobs: [],
+      active: false,
     }
   }
 
   // Activate new job overlay 
   initJobClicked = () => {
-    console.log('Activate');
+    this.setState({
+      active: true,
+    })
   }
 
   // Handle changes to input
@@ -64,22 +68,37 @@ class Experience extends Component {
     });
   }
 
+  foo = (e) => {
+    this.setState({
+      active: false,
+    })
+    console.log('hello');
+  }
+
   render() {
     const { jobs } = this.state;
 
     return (
       <div className='experience'>
-        <button onClick={this.initJobClicked}>+</button>
-        <form id='experience-form' onSubmit={this.saveJobClicked}>
+        <div id='experience-header'>
+          <div className='header'>Experience</div>
+          <button onClick={this.initJobClicked}>+</button>
+        </div>
+        <div id='experience-form' className={this.state.active ? 'active': null}>
+          <div className='form-header'>
+            <div className='form-title'>Add experience</div>
+            <button onClick={this.foo}>x</button>
+          </div>
           <Input label='Title' name='title' onChange={this.handleChange}></Input>
-          <Input label='Employment' name='employment' onChange={this.handleChange}></Input>
-          <Input label='Company' name='company' onChange={this.handleChange}></Input>
+          <Input label='Employment Type' name='employment' onChange={this.handleChange}></Input>
+          <Input label='Company name' name='company' onChange={this.handleChange}></Input>
           <Input label='Location' name='location' onChange={this.handleChange}></Input>
           <Input label='Start date' name='startDate' onChange={this.handleChange}></Input>
           <Input label='End date' name='endDate' onChange={this.handleChange}></Input>
           <Input label='Description' name='description' onChange={this.handleChange}></Input>
-          <button type='submit'>Save</button>
-        </form>
+          <button type='submit' onClick={this.saveJobClicked}>Save</button>
+        </div>
+        <div id='experience-overlay' className={this.state.active ? 'active': null}></div>
         { <Display jobs={jobs}/> }
       </div>
     )
