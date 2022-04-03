@@ -1,27 +1,28 @@
 import React, { Component } from 'react';
 import Input from './Input';
-import Job from './Job';
+// import Job from './Job';
 import uniqid from 'uniqid';
-import Display from './Display';
+import DisplayJobs from './Display';
 
 class Experience extends Component {
   constructor(props) {
     super(props);
 
     this.initJobClicked = this.initJobClicked.bind(this);
-    this.saveJobClicked = this.saveJobClicked.bind(this);
+    this.save = this.save.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.foo = this.foo.bind(this);
+    this.close = this.close.bind(this);
+    this.delete = this.delete.bind(this);
 
     this.state = {
       job: {
         title: '',
         employment: '',
-        company: this.props.company, 
-        location: this.props.location, 
-        startDate: this.props.startDate,
-        endDate: this.props.endDate,
-        description: this.props.description,
+        company: '', 
+        location: '', 
+        startDate: '',
+        endDate: '',
+        description: '',
         id: uniqid()
       },
       jobs: [],
@@ -46,13 +47,11 @@ class Experience extends Component {
         id: this.state.job.id,
       }
     });
-    // console.log(e.target.name, e.target.value);
   }
 
   // Save job 
-  saveJobClicked = (e) => {
+  save = (e) => {
     e.preventDefault();
-    console.log(this.state.job);
     this.setState({
       jobs: this.state.jobs.concat(this.state.job),
       job: {
@@ -68,11 +67,23 @@ class Experience extends Component {
     });
   }
 
-  foo = (e) => {
+  close = (e) => {
+    e.preventDefault();
     this.setState({
       active: false,
     })
-    console.log('hello');
+  }
+
+  // Delete job
+  delete = (e) => {
+    const index = this.state.jobs.findIndex((job) => job.id === e.currentTarget.id)
+    this.setState(state => {
+      const jobs = state.jobs.filter((job, num) => num !== index);
+
+      return {
+        jobs,
+      }
+    });
   }
 
   render() {
@@ -87,7 +98,7 @@ class Experience extends Component {
         <div id='experience-form' className={this.state.active ? 'active': null}>
           <div className='form-header'>
             <div className='form-title'>Add experience</div>
-            <button onClick={this.foo}>x</button>
+            <button className='close-btn' onClick={this.close}>x</button>
           </div>
           <Input label='Title' name='title' onChange={this.handleChange}></Input>
           <Input label='Employment Type' name='employment' onChange={this.handleChange}></Input>
@@ -96,10 +107,10 @@ class Experience extends Component {
           <Input label='Start date' name='startDate' onChange={this.handleChange}></Input>
           <Input label='End date' name='endDate' onChange={this.handleChange}></Input>
           <Input label='Description' name='description' onChange={this.handleChange}></Input>
-          <button type='submit' onClick={this.saveJobClicked}>Save</button>
+          <button type='submit' onClick={this.save}>Save</button>
         </div>
-        <div id='experience-overlay' className={this.state.active ? 'active': null}></div>
-        { <Display jobs={jobs}/> }
+        <div id='overlay' className={this.state.active ? 'active': null}></div>
+        { <DisplayJobs jobs={jobs} onClick={this.delete}/> }
       </div>
     )
   }
