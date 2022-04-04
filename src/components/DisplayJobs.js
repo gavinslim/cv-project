@@ -8,7 +8,7 @@ class DisplayJobs extends Component {
   render() {
     const { jobs, onClick } = this.props;
     return (
-      <div className='experiences'>
+      <div className='educations'>
         {jobs.map((job, i) => {
           return (
             <div className='job' key={i} id={job.id}>
