@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Input from './Input';
 import uniqid from 'uniqid';
 import DisplayJobs from './DisplayJobs';
-const { OpenButton } = require('./Button');
+import { OpenButton, CloseButton, SubmitButton } from './Button';
 
 class Experience extends Component {
   constructor(props) {
@@ -98,7 +98,7 @@ class Experience extends Component {
         <div className={this.state.active ? 'active form': 'form'}>
           <div className='form-header'>
             <div className='form-title'>Add experience</div>
-            <button className='close-btn' onClick={this.close}>x</button>
+            { <CloseButton click={this.close}/> }
           </div>
           <Input label='Title' name='title' onChange={this.change}></Input>
           <Input label='Employment Type' name='employment' onChange={this.change}></Input>
@@ -107,9 +107,11 @@ class Experience extends Component {
           <Input label='Start date' name='startDate' onChange={this.change}></Input>
           <Input label='End date' name='endDate' onChange={this.change}></Input>
           <Input label='Description' name='description' onChange={this.change}></Input>
-          <button type='submit' onClick={this.save}>Save</button>
+          <div className='form-footer'>
+            { <SubmitButton click={this.save}/> }
+          </div>
         </div>
-        <div id='overlay' className={this.state.active ? 'active': null}></div>
+        <div className={this.state.active ? 'overlay active': 'overlay'}></div>
         { <DisplayJobs jobs={jobs} onClick={this.delete}/> }
       </div>
     )

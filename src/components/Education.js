@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Input from './Input';
 import uniqid from 'uniqid';
 import DisplayEducation from './DisplayEducation';
-const { OpenButton } = require('./Button');
+import { OpenButton, CloseButton, SubmitButton } from './Button';
 
 class Education extends Component {
   constructor(props) {
@@ -90,16 +90,18 @@ class Education extends Component {
         <div className={this.state.active ? 'active form': 'form'}>
           <div className='form-header'>
             <div className='form-title'>Add education</div>
-            <button className='close-btn' onClick={this.close}>x</button>
+            { <CloseButton click={this.close}/>}
           </div>
           <Input label='School' name='school' onChange={this.change}></Input>
           <Input label='Degree' name='degree' onChange={this.change}></Input>
           <Input label='Field of Study' name='study' onChange={this.change}></Input>
           <Input label='Start date' name='startDate' onChange={this.change}></Input>
           <Input label='End date (or expected)' name='endDate' onChange={this.change}></Input>
-          <button type='submit' onClick={this.save}>Save</button>
+          <div className='form-footer'>
+            { <SubmitButton click={this.save}/> }
+          </div>
         </div>
-        <div id='overlay' className={this.state.active ? 'active': null}></div>
+        <div className={this.state.active ? 'overlay active': 'overlay'}></div>
         { <DisplayEducation educations={educations} onClick={this.delete}/>}
       </div>
     )
