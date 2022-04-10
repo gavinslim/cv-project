@@ -25,7 +25,7 @@ function SubmitButton(props) {
 function EditButton(props) {
   return (
     <button className='edit-btn' onClick={props.click}>
-      <i class="fa-solid fa-pencil"></i>
+      <i className="fa-solid fa-pencil"></i>
     </button>
   )
 }
