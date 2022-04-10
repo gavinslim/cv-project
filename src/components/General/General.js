@@ -15,7 +15,14 @@ class General extends Component {
     this.save = this.save.bind(this);
 
     this.state = {
-      generalInfo: {},
+      generalInfo: {
+        first: 'Gavin',
+        last: 'Lim',
+        headline: 'Engineer II - Design at Microchip Technology Inc.',
+        country: 'Canada',
+        postal: 'V5K',
+        city: 'Vancouver, British Columbia',
+      },
       general: {
         first: '',
         last: '',
@@ -72,6 +79,14 @@ class General extends Component {
         </div>
         { <Profile/> }
         { <DisplayGeneral general={generalInfo}/> }
+
+        <div className='header-buttons'>
+          <button id='open-to-btn'>Open to</button>
+          <button id='add-profile-btn'>Add profile section</button>
+          <button id='more-btn'>More</button>
+        </div>
+        
+
 
         <div className={this.state.active ? 'form active' : 'form'}>
           <div className='form-header'>

@@ -4,7 +4,11 @@
   --border-grey: #d5d5d5;
   --primary-grey: #333333;
   --background-color: rgba(255, 255, 255, 0);
-  --primary-blue: #0e6cc8;
+  --primary-blue: #0a66c2;
+  --blue-hover: #07498A;
+  --light-blue-hover: #D8EBFF;
+  
+  --gray-hover: #E6EBEF;
 
   --page-width: 600px;
   --form-width: 500px;
@@ -15,7 +19,7 @@
   --font-grey: #86888a;
   --icon-color: #86888a;
 
-  --spacing-one-and-a-half-x: 1rem;
+  --spacing-one-and-a-half-x: 24px;
   --page-width: 1000px;
 }
 
@@ -116,7 +120,7 @@ body {
 #general .profile-pic {
   position: absolute;
   top: 100px;
-  left: 30px;
+  left: var(--spacing-one-and-a-half-x);
   border-radius: 50%;
   border: 6px solid white;
 }
@@ -127,7 +131,81 @@ body {
 }
 
 .display-general {
-  border: 1px solid black;
+  padding: var(--spacing-one-and-a-half-x);
+  padding-top: 0px;
+  
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.display-general #name {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.display-general #headline {
+  font-size: 18px;
+}
+
+.display-general #location {
+  color: var(--icon-color);
+}
+
+#general .header-buttons {
+  /* border: 1px solid black; */
+  padding: var(--spacing-one-and-a-half-x);
+  padding-top: 0px;
+
+  display: flex;
+  gap: 8px;
+}
+
+.header-buttons button {
+  font-size: 16px;  
+  font-weight: bold;
+  border-radius: 30px;
+  border: none;
+
+  cursor: pointer;
+
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+
+  transition: all 0.25s;
+}
+
+.header-buttons #open-to-btn {
+  background-color: var(--primary-blue);
+  color: white;
+}
+
+.header-buttons #open-to-btn:hover {
+  background-color: var(--blue-hover);
+}
+
+.header-buttons #add-profile-btn {
+  background-color: white;
+  border: 1px solid var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+.header-buttons #add-profile-btn:hover {
+  background-color: var(--light-blue-hover);
+  box-shadow: inset 0px 0px 0px 1px var(--primary-blue);
+}
+
+.header-buttons #more-btn {
+  background-color: white;
+  border: 1px solid var(--icon-color);
+  color: var(--icon-color);
+}
+
+.header-buttons #more-btn:hover { 
+  background-color: var(--gray-hover);
+  box-shadow: inset 0px 0px 0px 1px var(--border-color);
 }
 
 .header-container {
