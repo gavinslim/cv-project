@@ -47,7 +47,7 @@ body {
 
 /* Top Header */
 #top-header {
-  width: 100vw;
+  width: 100%;
   background-color: white;
   margin-bottom: 20px;
 }
@@ -227,7 +227,7 @@ body {
   padding-left: 0px;
 }
 
-.open-btn, .close-btn, .edit-btn {
+.open-btn, .close-btn, .edit-btn, .delete-btn {
   background-color: transparent;
   border-radius: 50%;
   width: 40px;
@@ -366,12 +366,12 @@ body {
 
 /* Experience */
 /* ========== */
-.experiences .job {
+.experiences .job, .educations .education {
   display: flex;
   flex-direction: column;
 }
 
-.experiences .job-group {
+.experiences .job-group, .educations .education-group {
   display: flex;
   padding: var(--spacing-one-and-a-half-x);
   padding-bottom: 0px;
@@ -379,23 +379,23 @@ body {
   gap: 20px;
 }
 
-.experiences .job-icon {
+.experiences .job-icon, .educations .education-icon {
   font-size: 32px;
 }
 
-.experiences .job-details {
+.experiences .job-details, .educations .education-details {
   display: flex;
   flex-direction: column;
   gap: 5px;
   width: calc(var(--page-width) - 200px);
 }
 
-.experiences #title {
+.experiences #title, .educations #school {
   font-size: var(--font-size-20px);
   font-weight: bold;
 }
 
-.experiences #company {
+.experiences #company, .educations #degree {
   font-size: var(--font-size-18px);
 }
 
@@ -404,12 +404,14 @@ body {
   color: var(--icon-color);
 }
 
-.experiences .horizontal-line {
+.experiences .horizontal-line,
+.educations .horizontal-line {
   border: 0.5px solid var(--gray-hover);
   width: 95%;
 }
 
-.experiences .job-delete-btn, .experiences .job-edit-btn {
+.experiences .delete-btn, .experiences .edit-btn,
+.educations .delete-btn, .educations .edit-btn {
   font-size: 20px;
   border: none;
   background-color: transparent;
@@ -417,7 +419,6 @@ body {
 
   position: relative;
   height: 26px;
-  /* border: 1px solid black; */
   
   display: flex;
   align-items: center;
@@ -426,17 +427,21 @@ body {
   visibility: hidden;
 }
 
-.experiences .job-edit-btn {
+.experiences .edit-btn, .educations .edit-btn {
   font-size: 18px;
 }
 
-.experiences .job:hover .job-edit-btn {
+.experiences .job:hover .edit-btn, 
+.educations .education:hover .edit-btn {
   visibility: visible;
 }
 
-.experiences .job:hover .job-delete-btn {
+.experiences .job:hover .delete-btn,
+.educations .education:hover .delete-btn {
   visibility: visible;
 }
+
+
 
 /* Overlay */
 .overlay {
