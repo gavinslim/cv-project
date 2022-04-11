@@ -222,9 +222,10 @@ class Education extends Component {
             <div className='form-title'>{edit ? 'Edit education' : 'Add education'}</div>
             { <CloseButton click={this.close}/>}
           </div>
-          <Input label='School' name='school' onChange={this.change}></Input>
-          <Input label='Degree' name='degree' onChange={this.change}></Input>
-          <Input label='Field of Study' name='study' onChange={this.change}></Input>
+          <span className='required'>* Indicates required</span>
+          <Input label='School*' name='school' onChange={this.change}></Input>
+          <Input label='Degree*' name='degree' onChange={this.change}></Input>
+          <Input label='Field of Study*' name='study' onChange={this.change}></Input>
           <Input label='Start date' name='start' onChange={this.change}></Input>
           <Input label='End date (or expected)' name='end' onChange={this.change}></Input>
           <div className='form-footer'>
