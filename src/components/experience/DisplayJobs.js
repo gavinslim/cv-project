@@ -22,10 +22,10 @@ class DisplayJobs extends Component {
                   <div id='endDate'>{job.endDate}</div>
                   <div id='description'>{job.description}</div>
                 </div>
-                <button id={job.id} className='job-edit-btn' onClick={editJob}>
+                <button id={job.id} className='edit-btn' onClick={editJob}>
                   <i className="fa-solid fa-pencil"></i>
                 </button>
-                <button id={job.id} className='job-delete-btn' onClick={deleteJob}>
+                <button id={job.id} className='delete-btn' onClick={deleteJob}>
                   <i className="fa-solid fa-xmark"></i>
                 </button>
               </div>

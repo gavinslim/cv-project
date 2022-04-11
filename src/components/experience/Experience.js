@@ -164,6 +164,7 @@ class Experience extends Component {
   save = (e) => {
     e.preventDefault();
 
+    // Check required fields
     if (!this.check(e)) return;
 
     // Save existing job
@@ -222,7 +223,6 @@ class Experience extends Component {
 
   // Delete job
   delete = (e) => {
-    console.log(e.currentTarget.id);
     const index = this.state.jobs.findIndex((job) => job.id === e.currentTarget.id)
     this.setState(state => {
       const jobs = state.jobs.filter((job, num) => num !== index);
