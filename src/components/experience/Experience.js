@@ -15,6 +15,7 @@ class Experience extends Component {
     this.close = this.close.bind(this);
     this.delete = this.delete.bind(this);
     this.reset = this.reset.bind(this);
+    this.check = this.check.bind(this);
 
     this.state = {
       job: {
@@ -120,11 +121,50 @@ class Experience extends Component {
         id: uniqid()
       },
     })
+
+    // Clear placeholder fields in form
+    document.getElementById('title').setAttribute('placeholder', '');
+    document.getElementById('company').setAttribute('placeholder', '');
+    document.getElementById('location').setAttribute('placeholder', '');
+  }
+
+  // Check that required inputs are not empty
+  check = (e) => {
+    const userInput = this.state.job;
+    var output = true;
+
+    // Check title field
+    if (userInput.title === '') {
+      document.getElementById('title').setAttribute('placeholder', 'Title is a required field');
+      output = false;
+    } else {
+      document.getElementById('title').setAttribute('placeholder', '');
+    };
+
+    // Check company field
+    if (userInput.company === '') {
+      document.getElementById('company').setAttribute('placeholder', 'Company is a required field');
+      output = false;
+    } else {
+      document.getElementById('company').setAttribute('placeholder', '');
+    };
+
+    // Check location field 
+    if (userInput.location === '') {
+      document.getElementById('location').setAttribute('placeholder', 'Location is a required field');
+      output = false;
+    } else {
+      document.getElementById('location').setAttribute('placeholder', '');
+    };
+
+    return output;
   }
 
   // Save job 
   save = (e) => {
     e.preventDefault();
+
+    if (!this.check(e)) return;
 
     // Save existing job
     if (this.state.edit) {
@@ -163,7 +203,8 @@ class Experience extends Component {
           endDate: '',
           description: '',
           id: uniqid()
-        }
+        },
+        active: false,
       });
     }
   }
@@ -205,9 +246,10 @@ class Experience extends Component {
             <div className='form-title'>{edit ? 'Edit experience' : 'Add experience'}</div>
             { <CloseButton click={this.close}/> }
           </div>
-          <Input label='Title' name='title' onChange={this.change}></Input>
-          <Input label='Company name' name='company' onChange={this.change}></Input>
-          <Input label='Location' name='location' onChange={this.change}></Input>
+          <span className='required'>* Indicates required</span>
+          <Input label='Title*' name='title' onChange={this.change}></Input>
+          <Input label='Company name*' name='company' onChange={this.change}></Input>
+          <Input label='Location*' name='location' onChange={this.change}></Input>
           <Input label='Start date' name='startDate' onChange={this.change}></Input>
           <Input label='End date' name='endDate' onChange={this.change}></Input>
           <Input label='Description' name='description' onChange={this.change}></Input>

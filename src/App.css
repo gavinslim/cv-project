@@ -10,17 +10,22 @@
   
   --gray-hover: #E6EBEF;
 
-  --page-width: 600px;
   --form-width: 500px;
 
-  --font-size-main-header: 1.4rem;
+  --font-size-main-header: 1.3rem;
   --font-size-form-header: 1.4rem;
   --border-color: #313335;
   --font-grey: #86888a;
   --icon-color: #86888a;
+  --icon-size: 24px;
 
-  --spacing-one-and-a-half-x: 24px;
-  --page-width: 1000px;
+  --spacing-one-and-a-half-x: 20px;
+  --page-width: 800px;
+
+  --font-size-28px: 24px;
+  --font-size-20px: 16px;
+  --font-size-18px: 14px;
+  --font-size-16px: 14px;
 }
 
 body {
@@ -119,7 +124,7 @@ body {
 /* Profile */
 #general .profile-pic {
   position: absolute;
-  top: 100px;
+  top: 80px;
   left: var(--spacing-one-and-a-half-x);
   border-radius: 50%;
   border: 6px solid white;
@@ -130,25 +135,26 @@ body {
   border-top-left-radius: 0.7rem;
 }
 
-.display-general {
+#general .display-general {
   padding: var(--spacing-one-and-a-half-x);
-  padding-top: 0px;
+  padding-top: 10px;
   
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.display-general #name {
-  font-size: 28px;
+.display-general #general-name {
+  font-size: var(--font-size-28px);
   font-weight: bold;
 }
 
-.display-general #headline {
-  font-size: 18px;
+.display-general #general-headline {
+  font-size: var(--font-size-20px);
 }
 
-.display-general #location {
+.display-general #general-location {
+  font-size: var(--font-size-20px);
   color: var(--icon-color);
 }
 
@@ -213,18 +219,22 @@ body {
   justify-content: space-between;
 
   padding: var(--spacing-one-and-a-half-x);
-  padding-bottom: 0;
-  height: 50px;
+  padding-bottom: 0px;
+}
+
+.header-container .header-title {
+  padding: 8px;
+  padding-left: 0px;
 }
 
 .open-btn, .close-btn, .edit-btn {
   background-color: transparent;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border: none;
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: var(--icon-size);
 
   color: var(--icon-color);
 }
@@ -280,6 +290,155 @@ body {
   align-items: center;
 }
 
+.form .required {
+  color: var(--font-grey);
+  font-size: 12px;
+  padding-left: var(--spacing-one-and-a-half-x);
+  padding-bottom: 12px;
+}
+
+.form .form-footer {
+  display: flex;
+  justify-content: flex-end;
+
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 24px;
+  padding-right: 24px;
+
+  border-top: 1px solid var(--background-grey);
+}
+
+.form .submit-btn {
+  color: white;
+  background-color: var(--primary-blue);
+
+  font-size: 16px;  
+  font-weight: bold;
+  border-radius: 30px;
+  border: none;
+
+  cursor: pointer;
+
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+
+  transition: all 0.25s;
+}
+
+.form .submit-btn:hover {
+  background-color: var(--blue-hover);
+}
+
+
+.input {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--font-grey);
+
+  padding-left: var(--spacing-one-and-a-half-x);
+  padding-right: var(--spacing-one-and-a-half-x);
+  padding-bottom: 16px;
+}
+
+.input label {
+  font-size: 14px;
+  padding-bottom: 4px;
+}
+
+.input input {
+  border: none;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.6);
+  border-radius: 0.2rem;
+  background-color: white;
+  height: 24px;
+
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.input ::placeholder {
+  color: rgba(139, 0, 0, 0.726);
+}
+
+/* Experience */
+/* ========== */
+.experiences .job {
+  display: flex;
+  flex-direction: column;
+}
+
+.experiences .job-group {
+  display: flex;
+  padding: var(--spacing-one-and-a-half-x);
+  padding-bottom: 0px;
+
+  gap: 20px;
+}
+
+.experiences .job-icon {
+  font-size: 32px;
+}
+
+.experiences .job-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: calc(var(--page-width) - 200px);
+}
+
+.experiences #title {
+  font-size: var(--font-size-20px);
+  font-weight: bold;
+}
+
+.experiences #company {
+  font-size: var(--font-size-18px);
+}
+
+.experiences #location {
+  font-size: var(--font-size-16px);
+  color: var(--icon-color);
+}
+
+.experiences .horizontal-line {
+  border: 0.5px solid var(--gray-hover);
+  width: 95%;
+}
+
+.experiences .job-delete-btn, .experiences .job-edit-btn {
+  font-size: 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  position: relative;
+  height: 26px;
+  /* border: 1px solid black; */
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  visibility: hidden;
+}
+
+.experiences .job-edit-btn {
+  font-size: 18px;
+}
+
+.experiences .job:hover .job-edit-btn {
+  visibility: visible;
+}
+
+.experiences .job:hover .job-delete-btn {
+  visibility: visible;
+}
+
+/* Overlay */
 .overlay {
   position: fixed;
   top: 0;
@@ -296,42 +455,3 @@ body {
   opacity: 1;
   pointer-events: all;
 }
-
-.input {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  color: var(--font-grey);
-  /* padding-top: 16px;
-  padding-left: 24px;
-  padding-right: 24px; */
-
-  padding-left: var(--spacing-one-and-a-half-x);
-  padding-right: var(--spacing-one-and-a-half-x);
-  padding-bottom: 16px;
-
-  /* border: 1px solid black; */
-}
-
-.input label {
-  font-size: 14px;
-  padding-bottom: 4px;
-}
-
-.input input {
-  border: none;
-  /* border: 1px solid var(--border-grey); */
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.6);
-  /* box-sizing: border-box; */
-  border-radius: 0.2rem;
-  background-color: white;
-  height: 24px;
-}
-
-.job {
-  border: 1px solid black;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-

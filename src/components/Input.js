@@ -11,7 +11,7 @@ class Input extends Component {
     return (
       <div className='input'>
         <label htmlFor={name}>{label}</label>
-        <input name={name} id={name} value={value} onChange={onChange}>
+        <input name={name} id={name} value={value} onChange={onChange} autoComplete="off">
         </input>
       </div>
     )
