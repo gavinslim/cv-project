@@ -16,15 +16,17 @@ class Experience extends Component {
     this.delete = this.delete.bind(this);
     this.reset = this.reset.bind(this);
     this.check = this.check.bind(this);
+    this.calcDuration = this.calcDuration.bind(this);
 
     this.state = {
       job: {
         title: '',
         company: '', 
         location: '', 
-        startDate: '',
-        endDate: '',
+        start: '',
+        end: '',
         description: '',
+        duration: '',
         id: uniqid()
       },
       jobs: [
@@ -32,18 +34,20 @@ class Experience extends Component {
           title: 'Engineer II - Design',
           company: 'Microchip Technology Inc', 
           location: 'Burnaby, British Columbia, Canada', 
-          startDate: '',
-          endDate: '',
+          start: '',
+          end: '',
           description: '',
+          duration: '',
           id: uniqid()
         },
         {
           title: 'Engineer I - Design',
           company: 'Microchip Technology Inc', 
           location: 'Burnaby, British Columbia, Canada', 
-          startDate: '',
-          endDate: '',
+          start: '',
+          end: '',
           description: '',
+          duration: 'Jun 2019 - Nov 2021 · 2 yrs 5 mos',
           id: uniqid()
         }
 
@@ -81,8 +85,8 @@ class Experience extends Component {
     document.getElementById('title').value = job.title;
     document.getElementById('company').value = job.company;
     document.getElementById('location').value = job.location;
-    document.getElementById('startDate').value = job.startDate;
-    document.getElementById('endDate').value = job.endDate;
+    document.getElementById('start').value = job.start;
+    document.getElementById('end').value = job.end;
     document.getElementById('description').value = job.description;
 
     // Set job with existing values
@@ -93,9 +97,10 @@ class Experience extends Component {
         title: job.title,
         company: job.company, 
         location: job.location, 
-        startDate: job.startDate,
-        endDate: job.endDate,
+        start: job.start,
+        end: job.end,
         description: job.description,
+        duration: job.duration,
         id: job.id,
       },
     })
@@ -106,8 +111,8 @@ class Experience extends Component {
     document.getElementById('title').value = '';
     document.getElementById('company').value = '';
     document.getElementById('location').value = '';
-    document.getElementById('startDate').value = '';
-    document.getElementById('endDate').value = '';
+    document.getElementById('start').value = '';
+    document.getElementById('end').value = '';
     document.getElementById('description').value = '';
 
     this.setState({
@@ -115,8 +120,8 @@ class Experience extends Component {
         title: '',
         company: '', 
         location: '', 
-        startDate: '',
-        endDate: '',
+        start: '',
+        end: '',
         description: '',
         id: uniqid()
       },
@@ -157,7 +162,31 @@ class Experience extends Component {
       document.getElementById('location').setAttribute('placeholder', '');
     };
 
+    // Check study field 
+    if (userInput.start === '' || userInput.end === '') {
+      output = false;
+    } 
+
     return output;
+  }
+
+  // Calculate duration and update current job
+  calcDuration = () => {
+    const start = new Date(this.state.job.start);
+    const end = new Date(this.state.job.end);
+
+    const options = { month: 'short', year: 'numeric'};
+
+    // const startDate = `${start.getMonth()} ${start.getFullYear()}`;
+    const startDate = start.toLocaleString('default', options);
+    const endDate = end.toLocaleString('default', options);
+
+    const diff = new Date(end.getTime() - start.getTime())
+    const years = diff.getUTCFullYear() - 1970;
+    const months = diff.getUTCMonth();
+
+    let job = this.state.job;
+    job.duration = (years > 0) ? `${startDate} - ${endDate} · ${years} yrs ${months} mos` : `${startDate} - ${endDate} · ${months} mos`
   }
 
   // Save job 
@@ -166,6 +195,8 @@ class Experience extends Component {
 
     // Check required fields
     if (!this.check(e)) return;
+
+    this.calcDuration();
 
     // Save existing job
     if (this.state.edit) {
@@ -200,9 +231,10 @@ class Experience extends Component {
           title: '',
           company: '', 
           location: '', 
-          startDate: '',
-          endDate: '',
+          start: '',
+          end: '',
           description: '',
+          duration: '',
           id: uniqid()
         },
         active: false,
@@ -250,8 +282,8 @@ class Experience extends Component {
           <Input label='Title*' name='title' onChange={this.change}></Input>
           <Input label='Company name*' name='company' onChange={this.change}></Input>
           <Input label='Location*' name='location' onChange={this.change}></Input>
-          <Input label='Start date' name='startDate' onChange={this.change}></Input>
-          <Input label='End date' name='endDate' onChange={this.change}></Input>
+          <Input label='Start date' name='start' type='date' onChange={this.change}></Input>
+          <Input label='End date' name='end' type='date' onChange={this.change}></Input>
           <Input label='Description' name='description' onChange={this.change}></Input>
           <div className='form-footer'>
             { <SubmitButton click={this.save}/> }

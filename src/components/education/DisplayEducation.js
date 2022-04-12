@@ -17,8 +17,9 @@ class DisplayEducation extends Component {
                 <div className='education-details'>
                   <div id='school'>{education.school}</div>
                   <div id='degree'>{education.degree}, {education.study}</div>
-                  <div id='startDate'>{education.startDate}</div>
-                  <div id='endDate'>{education.endDate}</div>
+                  {/* <div id='start'>{education.start}</div> */}
+                  {/* <div id='end'>{education.end}</div> */}
+                  <div id='duration'>{education.duration}</div>
                 </div>
                 <button id={education.id} className='edit-btn' onClick={editEducation}>
                   <i className="fa-solid fa-pencil"></i>

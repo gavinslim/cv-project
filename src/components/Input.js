@@ -6,12 +6,12 @@ class Input extends Component {
   }
 
   render() {
-    const { label, name, value, onChange } = this.props;
+    const { label, name, value, type, onChange } = this.props;
 
     return (
       <div className='input'>
         <label htmlFor={name}>{label}</label>
-        <input name={name} id={name} value={value} onChange={onChange} autoComplete="off">
+        <input name={name} type={type} id={name} value={value} onChange={onChange} autoComplete="off">
         </input>
       </div>
     )

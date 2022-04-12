@@ -11,8 +11,12 @@ class Education extends Component {
     this.open = this.open.bind(this);
     this.save = this.save.bind(this);
     this.change = this.change.bind(this);
+    this.edit = this.edit.bind(this);
     this.close = this.close.bind(this);
     this.delete = this.delete.bind(this);
+    this.reset = this.reset.bind(this);
+    this.check = this.check.bind(this);
+    this.calcDuration = this.calcDuration.bind(this);
 
     this.state = {
       education: {
@@ -21,18 +25,24 @@ class Education extends Component {
         study: '',
         start: '',
         end: '',
+        duration: '',
         id: uniqid()
       },
+
+      // Array of educations
       educations: [
         {
           school: 'The University of British Columbia',
           degree: 'Bachelor of Applied Science - BASc',
           study: 'Electrical Engineering',
-          start: '',
-          end: '',
+          start: '2020-01-14',
+          end: '2022-04-21',
+          duration: '2020 - 2022',
           id: uniqid()          
-        }
+        },
       ],
+
+      // Flag for overlay and form display
       active: false,
       edit: false,
       educationIndex: '',
@@ -46,7 +56,8 @@ class Education extends Component {
   }
 
   change = (e) => {
-    const value = e.target.value;
+    var value = e.target.value;
+
     this.setState({
       education: {
         ...this.state.education,
@@ -55,7 +66,6 @@ class Education extends Component {
       },
     })
   }
-  
 
   // Edit education
   edit = (e) => {
@@ -78,6 +88,7 @@ class Education extends Component {
         study: education.study, 
         start: education.start,
         end: education.end,
+        duration: education.duration,
         id: education.id,
       },
     })
@@ -88,15 +99,17 @@ class Education extends Component {
     document.getElementById('school').value = '';
     document.getElementById('degree').value = '';
     document.getElementById('study').value = '';
+    document.getElementById('start').value = '';
+    document.getElementById('end').value = '';
 
     this.setState({
-      job: {
-        title: '',
-        company: '', 
-        location: '', 
-        startDate: '',
-        endDate: '',
-        description: '',
+      education: {
+        school: '',
+        degree: '',
+        study: '',
+        start: '',
+        end: '',
+        duration: '',
         id: uniqid()
       },
     })
@@ -136,7 +149,24 @@ class Education extends Component {
       document.getElementById('study').setAttribute('placeholder', '');
     };
 
+    // Check study field 
+    if (userInput.start === '' || userInput.end === '') {
+      output = false;
+    } 
+
     return output;
+  }
+
+  // Calculate duration and update current education
+  calcDuration = () => {
+    const start = new Date(this.state.education.start);
+    const end = new Date(this.state.education.end);
+
+    const diff = new Date(end.getTime() - start.getTime())
+    const years = diff.getUTCFullYear() - 1970;
+
+    let education = this.state.education;
+    education.duration = (years > 0) ? `${start.getFullYear()} - ${end.getFullYear()}` : `${start.getFullYear()}`
   }
 
   // Save education
@@ -146,16 +176,14 @@ class Education extends Component {
     // Check required field 
     if (!this.check(e)) return;
 
-    // Save existing education
+    this.calcDuration();
+
+    // If editing existing job
     if (this.state.edit) {
       const index = this.state.educationIndex;
-
-      // Create new jobs with edited values
       this.setState(state => {
         const educations = state.educations.map((education, num) => {
-          if (num === index) {
-            return this.state.education;
-          }
+          if (num === index) {return this.state.education;}
           return education;
         });
 
@@ -164,28 +192,31 @@ class Education extends Component {
         }
       });
 
+      this.reset(); 
       this.setState({
         edit: false,
       })
+    }
 
-      // Reset education state
-      this.reset();
-
-    } else {
+    // If adding a new job
+    if (!this.state.edit) {
       this.setState({
         educations: this.state.educations.concat(this.state.education),
         education: {
           school: '',
           degree: '',
           study: '',
-          startDate: '',
-          endDate: '',
+          start: '',
+          end: '',
+          duration: '',
           id: uniqid()
         },
+        active: false,
       })
     }
   }
 
+  // Close form
   close = (e) => {
     e.preventDefault();
     this.setState({
@@ -193,7 +224,6 @@ class Education extends Component {
       edit: false,
     })
 
-    // Reset job state
     this.reset();
   }
 
@@ -226,8 +256,8 @@ class Education extends Component {
           <Input label='School*' name='school' onChange={this.change}></Input>
           <Input label='Degree*' name='degree' onChange={this.change}></Input>
           <Input label='Field of Study*' name='study' onChange={this.change}></Input>
-          <Input label='Start date' name='start' onChange={this.change}></Input>
-          <Input label='End date (or expected)' name='end' onChange={this.change}></Input>
+          <Input label='Start date' type='date' name='start' onChange={this.change}></Input>
+          <Input label='End date (or expected)' type='date' name='end' onChange={this.change}></Input>
           <div className='form-footer'>
             { <SubmitButton click={this.save}/> }
           </div>

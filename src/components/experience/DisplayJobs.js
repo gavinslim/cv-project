@@ -17,9 +17,8 @@ class DisplayJobs extends Component {
                 <div className='job-details'>
                   <div id='title'>{job.title}</div>
                   <div id='company'>{job.company}</div>
+                  <div id='duration'>{job.duration}</div>
                   <div id='location'>{job.location}</div>
-                  <div id='startDate'>{job.startDate}</div>
-                  <div id='endDate'>{job.endDate}</div>
                   <div id='description'>{job.description}</div>
                 </div>
                 <button id={job.id} className='edit-btn' onClick={editJob}>
