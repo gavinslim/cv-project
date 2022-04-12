@@ -36,8 +36,25 @@ class General extends Component {
   }
 
   edit = () => {
+    const generalInfo = this.state.generalInfo;
+
+    document.getElementById('first').value = generalInfo.first;
+    document.getElementById('last').value = generalInfo.last;
+    document.getElementById('headline').value = generalInfo.headline;
+    document.getElementById('country').value = generalInfo.country;
+    document.getElementById('postal').value = generalInfo.postal;
+    document.getElementById('city').value = generalInfo.city;
+
     this.setState({
       active: true,
+      general: {
+        first: generalInfo.first,
+        last: generalInfo.last,
+        headline: generalInfo.headline,
+        country: generalInfo.country,
+        postal: generalInfo.postal,
+        city: generalInfo.city,
+      },
     })
   }
 
