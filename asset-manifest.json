@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/gavinslim/linkedin/static/css/main.c9128c1a.css",
+    "main.js": "/gavinslim/linkedin/static/js/main.5e020d97.js",
+    "static/media/banner.jpeg": "/gavinslim/linkedin/static/media/banner.96fa4feb3420d79db54b.jpeg",
+    "static/media/profile.jpeg": "/gavinslim/linkedin/static/media/profile.1af631bb8df06c6d9bfd.jpeg",
+    "index.html": "/gavinslim/linkedin/index.html",
+    "main.c9128c1a.css.map": "/gavinslim/linkedin/static/css/main.c9128c1a.css.map",
+    "main.5e020d97.js.map": "/gavinslim/linkedin/static/js/main.5e020d97.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c9128c1a.css",
+    "static/js/main.5e020d97.js"
+  ]
+}
