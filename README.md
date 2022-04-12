@@ -17,16 +17,14 @@ Purpose of this project was to mimic the LinkedIn profile page using ReactJS cla
 
 ## Live Demo
 
-[LinkedIn](http://gavinslim.com/linkedin/) :ship:
+[LinkedIn](http://gavinslim.com/linkedin/) :briefcase:
 
 ## Setup
 
-1. Clone the repository:<br>```git clone https://github.com/gavinslim/battleship.git```
+1. Clone the repository:<br>```git clone https://github.com/gavinslim/linkedin.git```
 
 2. Inside the cloned repo, install the required dependencies:<br>```npm install```
 
 3. Initiate live demo:<br>```npm run start```
 
 4. Produce the distribution files:<br>```npm run build```
-
-5. Run Jest test:<br>```npm run test-watch```
